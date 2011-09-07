@@ -17,6 +17,12 @@ License
 
 MIT-style license, see [INSTALL.txt](http://github.com/jheusala/node-sqlmw/blob/master/LICENSE.txt).
 
+Backends
+--------
+
+* [mysql](https://github.com/felixge/node-mysql)
+* [pg](https://github.com/brianc/node-postgres)
+
 Examples
 --------
 
