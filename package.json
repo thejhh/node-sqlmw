@@ -2,7 +2,7 @@
   "author": "Jaakko-Heikki Heusala <jheusala@iki.fi> (http://www.jhh.me)",
   "name": "sqlmw",
   "description": "Middleware framework for SQL in Node.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/jheusala/node-sqlmw.git"
