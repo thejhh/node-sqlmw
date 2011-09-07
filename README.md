@@ -34,7 +34,7 @@ You can create saved callback functions like this:
 And also group multiple callbacks into one single callback function this way:
 
 	var insert_player = sql.group(
-		sql.query('SELECT COUNT(number)+1 AS next_number FROM player WHERE game_id=:game_id'),
+		sql.query('SELECT COUNT(number)+1 AS number FROM player WHERE game_id=:game_id'),
 		sql.query('INSERT INTO player (number, game_id) VALUES (:number, :game_id)')
 	);
 
