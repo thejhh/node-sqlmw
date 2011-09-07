@@ -20,4 +20,4 @@ MIT-style license, see [INSTALL.txt](http://github.com/jheusala/node-sqlmw/blob/
 Examples
 --------
 
-See [examples/]().
+See [examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
