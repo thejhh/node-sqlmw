@@ -83,6 +83,5 @@ Initializing the `sql` object for PostgreSQL:
 	var config = 'tcp://postgres:1234@localhost/postgres',
 	    sql = require('sqlmw')('pg', config);
 
-See more from [unit 
-tests](https://github.com/jheusala/node-sqlmw/tree/master/unit) and 
+See more from [unit tests](https://github.com/jheusala/node-sqlmw/tree/master/unit) and 
 [examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
