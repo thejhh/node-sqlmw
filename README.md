@@ -37,20 +37,42 @@ You can create saved callback functions like this:
 
 	var delete_player = sql.query('DELETE FROM player WHERE game_id=:game_id AND number=:number LIMIT 1');
 
-And also group multiple callbacks into one single callback function this way:
+And use `delete_player` like this:
+
+	var connect = sql.connect();
+	connect({}, function(err) {
+		if(err) {
+			console.log('Failed to connect: ' + err);
+		} else {
+			delete_player({'game_id':1}, function(err) {
+				if(err) console.log('Failed to add player: ' + err);
+				else console.log('Successfully added player');
+			});
+		}
+	});
+
+Middleware `sql.connect()` can be executed more than once. It creates new clients only if connection is disconnected.
+
+You can also group multiple middlewares into one single callback function this way:
 
 	var insert_player = sql.group(
+		sql.connect(),
 		sql.query('SELECT COUNT(number)+1 AS number FROM player WHERE game_id=:game_id'),
-		sql.query('INSERT INTO player (number, game_id) VALUES (:number, :game_id)')
+		sql.query('INSERT INTO player (number, game_id) VALUES (:number, :game_id)'),
+		sql.disconnect()
 	);
 
-And use `insert_player` like this:
+And use `insert_player` simply like this:
 
 	insert_player({'game_id':1}, function(err) {
 		if(err) console.log('Failed to add player: ' + err);
 		else console.log('Successfully added player');
 	});
 
-You can also use `insert_player` as a middleware when grouping:
+You can also use groups like `insert_player` as a middleware when grouping:
 
 	var useless_operation = sql.group(insert_player, delete_player);
+	useless_operation({}, function(err) {
+		if(err) console.log('Failed: ' + err);
+		else console.log('Successfully added AND removed a player');
+	});
