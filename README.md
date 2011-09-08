@@ -26,8 +26,6 @@ Backends
 Examples
 --------
 
-See [examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
-
 Initializing the `sql` object is easy:
 
 	var config = {'host': 'localhost', 'user': 'user', 'password': 'hello', 'database': 'dbname'},
@@ -76,3 +74,8 @@ You can also use groups like `insert_player` as a middleware when grouping:
 		if(err) console.log('Failed: ' + err);
 		else console.log('Successfully added AND removed a player');
 	});
+
+See more from [unit 
+tests](https://github.com/jheusala/node-sqlmw/tree/master/unit). and 
+[examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
+
