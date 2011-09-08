@@ -29,8 +29,9 @@ module.exports = testCase({
 	backend: function(test){
 		var mytestcase = this;
 		var backend = mytestcase.sql.backend;
-		test.expect(5);
+		test.expect(6);
 		test.ok(backend, "backend invalid");
+		test.strictEqual(backend.type, 'mysql');
 		test.strictEqual(typeof backend.placeholder, 'function', "Missing .placeholder");
 		test.strictEqual(typeof backend.connect, 'function', "Missing .connect");
 		test.strictEqual(typeof backend.query, 'function', "Missing .query");
