@@ -76,6 +76,6 @@ You can also use groups like `insert_player` as a middleware when grouping:
 	});
 
 See more from [unit 
-tests](https://github.com/jheusala/node-sqlmw/tree/master/unit). and 
+tests](https://github.com/jheusala/node-sqlmw/tree/master/unit) and 
 [examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
 
