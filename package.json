@@ -1,23 +1,40 @@
 {
-  "author": "Jaakko-Heikki Heusala <jheusala@iki.fi> (http://www.jhh.me)",
   "name": "sqlmw",
+  "author": "Jaakko-Heikki Heusala <jheusala@iki.fi> (http://www.jhh.me)",
   "description": "Middleware framework for SQL in Node.js",
-  "version": "0.0.5",
-  "homepage": "http://github.com/jheusala/node-sqlmw",
+  "version": "0.1.0",
+  "homepage": "http://github.com/jheusala/node-sqlm#readme",
   "repository": {
     "type": "git",
-    "url": "git://github.com/jheusala/node-sqlmw.git"
+    "url": "https://github.com/jheusala/node-sqlmw.git"
   },
   "main": "lib/sqlmw.js",
   "engines": {
     "node": "*"
   },
+  "bugs": {
+    "mail" : "jheusala@iki.fi",
+    "web" : "https://github.com/jheusala/node-sqlmw/issues"
+  },
+  "directories": {
+    "lib":"./lib",
+    "examples":"./examples",
+    "test":"./test"
+  },
   "dependencies": {
-    "mysql": "*"
-    "pg": "*"
+    "mysql": "*",
+    "pg": "*",
     "snippets": "*"
   },
   "devDependencies": {
     "lint": "*"
-  }
+  },
+  "scripts": {
+    "test": "./run-test.sh",
+    "lint": "./run-lint.sh"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/jheusala/node-sqlmw/blob/master/LICENSE.txt"
+  }]
 }
