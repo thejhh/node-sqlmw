@@ -23,10 +23,10 @@ Backends
 * [mysql](https://github.com/felixge/node-mysql)
 * [pg](https://github.com/brianc/node-postgres)
 
-Examples
---------
+Examples for MySQL
+------------------
 
-Initializing the `sql` object is easy:
+Initializing the `sql` object for MySQL:
 
 	var config = {'host': 'localhost', 'user': 'user', 'password': 'hello', 'database': 'dbname'},
 	    sql = require('sqlmw')('mysql', config);
@@ -75,7 +75,14 @@ You can also use groups like `insert_player` as a middleware when grouping:
 		else console.log('Successfully added AND removed a player');
 	});
 
+Examples for PostgreSQL
+-----------------------
+
+Initializing the `sql` object for PostgreSQL:
+
+	var config = 'tcp://postgres:1234@localhost/postgres',
+	    sql = require('sqlmw')('pg', config);
+
 See more from [unit 
 tests](https://github.com/jheusala/node-sqlmw/tree/master/unit) and 
 [examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
-
