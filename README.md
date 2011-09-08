@@ -88,3 +88,43 @@ actual query strings might not be always compatible for both backends.
 
 See more from [unit tests](https://github.com/jheusala/node-sqlmw/tree/master/test) and 
 [examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
+
+Middlewares
+-----------
+
+### `sql.connect()`
+
+Connect to server if disconnected.
+
+### `sql.disconnect()`
+
+Disconnect from server.
+
+### `sql.query(str)`
+
+Execute SQL query.
+
+### `sql.group(a[, b[, ...]])`
+
+Group multiple middlewares as one.
+
+### `sql.assign(key, value)`
+
+Assign `key` in the current state object as `value`.
+
+Middlewares in TODO
+-------------------
+
+These middlewares are NOT IMPLEMENTED yet but might be in the future. You can also implement your own middlewares.
+
+### `sql.createDatabase(name)`
+
+Create new database named `name`.
+
+### `sql.insert(table)`
+
+Insert values to `table`.
+
+### `sql.del(table)`
+
+### `sql.update(table)`
