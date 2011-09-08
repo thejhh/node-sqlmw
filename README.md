@@ -4,7 +4,7 @@ Middleware Framework for SQL
 Description
 -----------
 
-This is a simple framework to combine multiple async SQL queries into usable 
+This is a simple framework to combine multiple async SQL operations into usable 
 callback functions.
 
 Installation for Node.js
@@ -82,6 +82,9 @@ Initializing the `sql` object for PostgreSQL:
 
 	var config = 'tcp://postgres:1234@localhost/postgres',
 	    sql = require('sqlmw')('pg', config);
+
+Interface for sqlmw with PostgreSQL is the same as with MySQL except obviously 
+actual query strings might not be always compatible for both backends.
 
 See more from [unit tests](https://github.com/jheusala/node-sqlmw/tree/master/test) and 
 [examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
