@@ -42,7 +42,7 @@ And use `delete_player` like this:
 		if(err) {
 			console.log('Failed to connect: ' + err);
 		} else {
-			delete_player({'game_id':1}, function(err) {
+			delete_player({'game_id':1,'number':1}, function(err) {
 				if(err) console.log('Failed to add player: ' + err);
 				else console.log('Successfully added player');
 			});
