@@ -26,6 +26,17 @@ module.exports = testCase({
 			callback(err);
 		});
 	},
+	backend: function(test){
+		var mytestcase = this;
+		var backend = mytestcase.sql.backend;
+		test.expect(5);
+		test.ok(backend, "backend invalid");
+		test.strictEqual(typeof backend.placeholder, 'function', "Missing .placeholder");
+		test.strictEqual(typeof backend.connect, 'function', "Missing .connect");
+		test.strictEqual(typeof backend.query, 'function', "Missing .query");
+		test.strictEqual(typeof backend.disconnect, 'function', "Missing .disconnect");
+		test.done();
+	},
 	query_insert: function(test){
 		var mytestcase = this;
 		test.expect(5);
