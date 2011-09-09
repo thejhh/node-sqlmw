@@ -177,3 +177,42 @@ backends.
 
 Returns middleware to update row(s) in table. This should be portable for all 
 backends.
+
+Running lint and unit tests
+---------------------------
+
+To run our [lint](https://github.com/jpolo/node-lint) test just execute command `./run-lint.sh`:
+
+	+ node-lint --no-colors --config=lint.json lib/
+	✓ Valid » 7 files ∙ 0 error
+
+To run our [nodeunit](https://github.com/caolan/nodeunit) tests just execute command `npm test`:
+
+	> sqlmw@0.1.1 test /home/users/jhh/git/node-sqlmw
+	> ./run-test.sh
+	
+	+ node test/run.js
+	
+	test-mysql.js
+	✔ backend
+	✔ query_insert_with_callback
+	✔ query_select_with_empty_options_callback
+	✔ query_select_without_options_with_callback
+	✔ query_select_single_with_options_callback
+	✔ query_delete
+	✔ query_update
+	✔ query_delete_with_options_without_callback
+	✔ query_delete_without_options_callback
+	
+	test-pg.js
+	✔ backend
+	✔ query_insert_with_options_callback
+	✔ query_select_with_emptyoptions_callback
+	✔ query_select_single_with_options_callback
+	✔ query_delete_with_options_callback
+	✔ query_update_with_options_callback
+	✔ query_select_without_options_with_callback
+	✔ query_select_single_without_options_callback
+	
+	OK: 305 assertions (901ms)
+
