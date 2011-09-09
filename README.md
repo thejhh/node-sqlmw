@@ -118,17 +118,31 @@ Every returned callable middleware works the same way and can be called in the f
 	var fn = sql.query('DELETE FROM table WHERE id = :id');
 	fn({'id':2});
 
-Middlewares
------------
+Built-in Middlewares
+--------------------
 
-### `sql.debug`
+### `sql.connect()`
 
-Debug flag. If set to true middlewares are allowed to output debug messages 
-with `console.log()`.
+Returns callable middleware to connect our backend to the server if disconnected.
 
-### `sql.use(mw [, ...])`
+### `sql.disconnect()`
 
-Loads new user-defined middlewares.
+Returns callable middleware to disconnect our backend from the server.
+
+### `sql.query(str)`
+
+Returns callable middleware for generic SQL query.
+
+### `sql.group(a[, b[, ...]])`
+
+Returns set of middlewares grouped as one callable middleware. You can group other groups, too.
+
+### `sql.assign(key, value)`
+
+Returns middleware to assign `key` in the current state object as `value`.
+
+User-defined Middlewares
+------------------------
 
 Create a file named `ourMiddleware.js`:
 
@@ -152,6 +166,18 @@ And use it like this:
 		if(err) console.log('Failed to insert row: ' + err);
 	});
 
+`sql` object members
+--------------------
+
+### `sql.debug`
+
+Debug flag. If set to true middlewares are allowed to output debug messages 
+with `console.log()`.
+
+### `sql.use(mw [, ...])`
+
+Loads new user-defined middlewares.
+
 ### `sql.backend`
 
 Current backend object in use.
@@ -162,26 +188,6 @@ Returns backend type as `String`:
 
 * `pg` for PostgreSQL
 * `mysql` for MySQL
-
-### `sql.connect()`
-
-Returns callable middleware to connect our backend to the server if disconnected.
-
-### `sql.disconnect()`
-
-Returns callable middleware to disconnect our backend from the server.
-
-### `sql.query(str)`
-
-Returns callable middleware for generic SQL query.
-
-### `sql.group(a[, b[, ...]])`
-
-Returns set of middlewares grouped as one callable middleware. You can group other groups, too.
-
-### `sql.assign(key, value)`
-
-Returns middleware to assign `key` in the current state object as `value`.
 
 Middlewares in TODO
 -------------------
