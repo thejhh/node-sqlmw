@@ -121,10 +121,36 @@ Every returned callable middleware works the same way and can be called in the f
 Middlewares
 -----------
 
-### `sql._debug`
+### `sql.debug`
 
 Debug flag. If set to true middlewares are allowed to output debug messages 
 with `console.log()`.
+
+### `sql.use(mw [, ...])`
+
+Loads new user-defined middlewares.
+
+Create a file named `ourMiddleware.js`:
+
+	module.exports = function(sql) {
+		sql.insertArticle = function() {
+			var sql = this,
+			    insert = sql.query('INSERT INTO '+mytestcase.table+' (title, text, created) VALUES (:title, :text, :created)')
+			return function(options, next) {
+				insert({'title':'Hello world', 'text':'This is a test article.', 'created':new Date()}, next);
+			};
+		};
+	};
+
+And use it like this:
+
+	var ourMiddleware = require('./ourMiddleware.js');
+	mytestcase.sql.use(ourMiddleware);
+	
+	var cb = mytestcase.sql.insertArticle();
+	cb(function(err, state) {
+		if(err) console.log('Failed to insert row: ' + err);
+	});
 
 ### `sql.backend`
 

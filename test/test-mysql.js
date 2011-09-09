@@ -344,6 +344,33 @@ module.exports = testCase({
 				test.done();
 			});
 		}, 250);
+	},
+	/* Test for sql.use and user defined middlewares */
+	sql_use_userdefined_middleware: function(test){
+		var mytestcase = this;
+		test.expect(5);
+		
+		function ourMiddleware(sql) {
+			sql.insertArticle = function() {
+				var sql = this;
+				var insert = sql.query('INSERT INTO '+mytestcase.table+' (title, text, created) VALUES (:title, :text, :created)')
+				return function(options, next) {
+					insert({'title':'Hello world', 'text':'This is a test article.', 'created':new Date()}, next);
+				};
+			};
+		}
+		
+		mytestcase.sql.use(ourMiddleware);
+		
+		var cb = mytestcase.sql.insertArticle();
+		test.ok(cb, "Failed to create callback");
+		test.strictEqual(typeof cb, 'function', "Failed to create callback");
+		cb(function(err, state) {
+			test.ok(!err, "Error: " + err);
+			test.ok(state, "state invalid");
+			test.strictEqual(state._insertId, 1, "state._insertId failed");
+			test.done();
+		});
 	}
 });
 
