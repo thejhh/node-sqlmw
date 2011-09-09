@@ -113,10 +113,10 @@ Every returned callable middleware works the same way and can be called in the f
 	var fn = sql.query('DELETE FROM table');
 	fn();
 
-### Without user defined callback (errors are printed to stderr):
+### With options but without user defined callback (errors are printed to stderr):
 
 	var fn = sql.query('DELETE FROM table WHERE id = :id');
-	fn({'id':2);
+	fn({'id':2});
 
 Middlewares
 -----------
