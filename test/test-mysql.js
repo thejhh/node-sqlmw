@@ -178,7 +178,7 @@ module.exports = testCase({
 		});
 	},
 	/* Test for DELETE with selection (options) and user defined callback function */
-	query_delete: function(test){
+	query_delete_with_options_callback: function(test){
 		var mytestcase = this;
 		test.expect(19);
 		var cb = mytestcase.sql.group(
@@ -216,7 +216,7 @@ module.exports = testCase({
 		});
 	},
 	/* Test for UPDATE with options and user defined callback function */
-	query_update: function(test){
+	query_update_with_options_callback: function(test){
 		var mytestcase = this;
 		test.expect(24);
 		var cb = mytestcase.sql.group(
