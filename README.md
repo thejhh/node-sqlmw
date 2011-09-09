@@ -38,7 +38,7 @@ You can create saved callback functions like this:
 And use `delete_player` like this:
 
 	var connect = sql.connect();
-	connect({}, function(err) {
+	connect(function(err) {
 		if(err) {
 			console.log('Failed to connect: ' + err);
 		} else {
@@ -70,7 +70,7 @@ And use `insert_player` simply like this:
 You can also use groups like `insert_player` as a middleware when grouping:
 
 	var useless_operation = sql.group(insert_player, delete_player);
-	useless_operation({}, function(err) {
+	useless_operation(function(err) {
 		if(err) console.log('Failed: ' + err);
 		else console.log('Successfully added AND removed a player');
 	});
@@ -89,42 +89,91 @@ actual query strings might not be always compatible for both backends.
 See more from [unit tests](https://github.com/jheusala/node-sqlmw/tree/master/test) and 
 [examples/](https://github.com/jheusala/node-sqlmw/tree/master/examples).
 
+Calling middlewares
+-------------------
+
+Every returned callable middleware works the same way and can be called in the following standard ways.
+
+### With options:
+
+	var fn = sql.query('INSERT INTO table (a,b) VALUES (:a, :b)');
+	fn({'a':1, 'b':2}, function(err) {
+		if(err) console.log('Error: ' + err);
+	});
+
+### Without options:
+
+	var fn = sql.query('DELETE FROM table');
+	fn(function(err) {
+		if(err) console.log('Error: ' + err);
+	});
+
+### Without user defined callback (errors are printed to stderr):
+
+	var fn = sql.query('DELETE FROM table');
+	fn();
+
+### Without user defined callback (errors are printed to stderr):
+
+	var fn = sql.query('DELETE FROM table WHERE id = :id');
+	fn({'id':2);
+
 Middlewares
 -----------
 
+### `sql.backend`
+
+Current backend object in use.
+
+#### `sql.backend.type`
+
+Returns backend type as `String`:
+
+* `pg` for PostgreSQL
+* `mysql` for MySQL
+
 ### `sql.connect()`
 
-Connect to server if disconnected.
+Returns callable middleware to connect our backend to the server if disconnected.
 
 ### `sql.disconnect()`
 
-Disconnect from server.
+Returns callable middleware to disconnect our backend from the server.
 
 ### `sql.query(str)`
 
-Execute SQL query.
+Returns callable middleware for generic SQL query.
 
 ### `sql.group(a[, b[, ...]])`
 
-Group multiple middlewares as one.
+Returns set of middlewares grouped as one callable middleware. You can group other groups, too.
 
 ### `sql.assign(key, value)`
 
-Assign `key` in the current state object as `value`.
+Returns middleware to assign `key` in the current state object as `value`.
 
 Middlewares in TODO
 -------------------
 
-These middlewares are NOT IMPLEMENTED yet but might be in the future. You can also implement your own middlewares.
+These middlewares are NOT IMPLEMENTED but might be in the future. You can also 
+implement your own middlewares.
 
-### `sql.createDatabase(name)`
+### `sql.create(name)`
 
-Create new database named `name`.
+Returns middleware to create a new database. This should be portable for all 
+backends.
 
 ### `sql.insert(table)`
 
-Insert values to `table`.
+Returns middleware to insert values to a table. This should be portable for all 
+backends.
 
 ### `sql.del(table)`
 
+Returns middleware to remove rows from a table. This should be portable for all 
+backends.
+
 ### `sql.update(table)`
+
+Returns middleware to update row(s) in table. This should be portable for all 
+backends.
