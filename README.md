@@ -121,6 +121,11 @@ Every returned callable middleware works the same way and can be called in the f
 Middlewares
 -----------
 
+### `sql._debug`
+
+Debug flag. If set to true middlewares are allowed to output debug messages 
+with `console.log()`.
+
 ### `sql.backend`
 
 Current backend object in use.
