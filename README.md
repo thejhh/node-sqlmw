@@ -49,7 +49,7 @@ And use `delete_player` like this:
 		}
 	});
 
-Middleware `sql.connect()` can be executed more than once. It creates new clients only if connection is disconnected.
+Middleware `sql.connect()` can be executed more than once. It creates new connections only if connection is disconnected.
 
 You can also group multiple middlewares into one single callback function this way:
 
