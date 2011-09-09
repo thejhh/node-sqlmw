@@ -149,7 +149,7 @@ Create a file named `ourMiddleware.js`:
 	module.exports = function(sql) {
 		sql.insertArticle = function() {
 			var sql = this,
-			    insert = sql.query('INSERT INTO '+mytestcase.table+' (title, text, created) VALUES (:title, :text, :created)')
+			    insert = sql.query('INSERT INTO article (title, text, created) VALUES (:title, :text, :created)')
 			return function(options, next) {
 				insert({'title':'Hello world', 'text':'This is a test article.', 'created':new Date()}, next);
 			};
@@ -159,9 +159,9 @@ Create a file named `ourMiddleware.js`:
 And use it like this:
 
 	var ourMiddleware = require('./ourMiddleware.js');
-	mytestcase.sql.use(ourMiddleware);
+	sql.use(ourMiddleware);
 	
-	var cb = mytestcase.sql.insertArticle();
+	var cb = sql.insertArticle();
 	cb(function(err, state) {
 		if(err) console.log('Failed to insert row: ' + err);
 	});
