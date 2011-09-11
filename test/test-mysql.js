@@ -373,7 +373,7 @@ module.exports = testCase({
 			
 			test.done();
 		});
-	}
+	},
 	/* Test for transactions */
 	/* MySQL does not support transactions... really? MySQL, really?
 	transaction_failing: function(test){
@@ -406,6 +406,21 @@ module.exports = testCase({
 		});
 	}
 	*/
+	/* Test for INSERT with false values */
+	query_insert_with_false_values: function(test){
+		var mytestcase = this;
+		test.expect(6);
+		var cb = mytestcase.sql.query('INSERT INTO '+mytestcase.table+' (title, text, created) VALUES (:title, :text, :created)');
+		test.ok(cb, "Failed to create callback");
+		test.strictEqual(typeof cb, 'function', "Failed to create callback");
+		cb({'title':'Hello world', 'text':'', 'created':new Date()}, function(err, state) {
+			test.ok(!err, "Error: " + err);
+			test.ok(state, "state invalid");
+			test.notStrictEqual(state._insertId, undefined);
+			test.strictEqual(state._insertId, 1, "state._insertId failed");
+			test.done();
+		});
+	}
 });
 
 /* EOF */
