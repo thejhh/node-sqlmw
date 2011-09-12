@@ -42,15 +42,38 @@ module.exports = testCase({
 	/* Test for INSERT with user defined callback function */
 	query_insert_with_callback: function(test){
 		var mytestcase = this;
-		test.expect(5);
+		var date = new Date();
+		date.setTime(1315790265000);
+		test.expect(19);
 		var cb = mytestcase.sql.query('INSERT INTO '+mytestcase.table+' (title, text, created) VALUES (:title, :text, :created)');
 		test.ok(cb, "Failed to create callback");
 		test.strictEqual(typeof cb, 'function', "Failed to create callback");
-		cb({'title':'Hello world', 'text':'This is a test article.', 'created':new Date()}, function(err, state) {
+		cb({'title':'Hello world', 'text':'This is a test article.', 'created':date}, function(err, state) {
 			test.ok(!err, "Error: " + err);
 			test.ok(state, "state invalid");
 			test.strictEqual(state._insertId, 1, "state._insertId failed");
-			test.done();
+			
+			var select = mytestcase.sql.query('SELECT * FROM '+mytestcase.table);
+			test.ok(select, "Failed to create callback");
+			test.strictEqual(typeof select, 'function', "Failed to create callback");
+			select(function(err, state) {
+				test.ok(!err, "Error: " + err);
+				test.ok(state);
+				test.ok(state._rows);
+				test.ok(state._results);
+				test.strictEqual( state._rows.length, 1);
+				test.strictEqual( state._results.length, 1);
+				test.strictEqual( state._results[0].length, 1);
+				test.strictEqual( sys.inspect(state._rows[0]), sys.inspect(state._results[0][0]), "Article #1 failed");
+				
+				test.strictEqual( state._rows[0].id, 1);
+				test.strictEqual( state._rows[0].title, 'Hello world');
+				test.strictEqual( state._rows[0].text, 'This is a test article.');
+				test.strictEqual( sys.inspect(state._rows[0].created), 'Mon, 12 Sep 2011 01:17:45 GMT');
+				test.done();
+			});
+
+
 		});
 	},
 	/* Test for SELECT without options and with user defined callback function */
